@@ -48,8 +48,8 @@ model TeacherDiscipline {
   id          Int        @id @default(autoincrement())
   teacherId   Int
   teacher     Teacher    @relation(fields: [teacherId], references: [id])
-  discplineId Int
-  discipline  Discipline @relation(fields: [discplineId], references: [id])
+  disciplineId Int
+  discipline  Discipline @relation(fields: [disciplineId], references: [id])
   Test        Test[]
 
   @@map("teachersDisciplines")
