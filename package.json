@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "16.15.1"
+  },
   "scripts": {
     "build": "tsc src/server.ts",
     "test": "dotenv -e .env.test npm run prisma && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
