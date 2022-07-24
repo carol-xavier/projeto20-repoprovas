@@ -39,6 +39,13 @@ describe("GET/tests", () => {
             .set('Authorization', `Bearer ${token}`);
         expect(promise.status).toBe(200);
     });
+
+    it("return all tests gruped by teacher. statusCode=200", async () => {
+        const promise = await supertest(app)
+            .get(`/tests?groupBy=teachers `)
+            .set('Authorization', `Bearer ${token}`);
+        expect(promise.status).toBe(200);
+    });
 });
 
 afterAll(async () => {
