@@ -38,13 +38,14 @@ async function findTeacherByName(teacherName: string) {
 };
 
 async function findTeacherDisciplineId(teacherId: number, disciplineId: number) {
+    console.log("REPOO-line 41",teacherId, disciplineId);
     const teacherDiscipline = await prisma.teacherDiscipline.findFirst({
         where: {
             teacherId,
             disciplineId
         }
     });
-
+    console.log("REPOO-line 47",teacherDiscipline);
     return teacherDiscipline.id;
 };
 

@@ -19,25 +19,8 @@ async function verifyTestData(data: CreateTestData) {
 
 async function getTestsGroupedByDisciplines() {
     const tests = await testsRepository.getAllTests();
-    const organizedList = await organizeListByDiscipline(tests);
-    // const testList = await Promise.all(tests.map(async (test) => await groupTestsByDiscipline(test)));
     return tests;
 };
-
-// async function groupTestsByDiscipline(test) {
-//     const teacher = await testsNamesRepository.findTeacherById(test.teacherDiscipline.teacherId);
-//     const discipline = await testsNamesRepository.findDisciplineById(test.teacherDiscipline.disciplineId)
-//     const category = await testsNamesRepository.findCategoryById(test.categoryId);
-//     const term = await testsNamesRepository.findTermById(discipline.termId);
-
-//     return {
-//         discipline: discipline.name,
-//         term: term.number,
-//         category: category.name,
-//         testName: test.name,
-//         teacher: teacher.name
-//     }
-// }
 
 const testsService = {
     insertTest,
@@ -46,9 +29,6 @@ const testsService = {
 
 export default testsService;
 
-async function organizeListByDiscipline(tests) {
-    
-};
 
 async function getCategoryId(categoryName: string) {
     const category: number = await testsIdRepository.findCategoryByName(categoryName);
