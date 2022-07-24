@@ -2,8 +2,8 @@ import categoryRepository from "../repositories/categoryRepository.js";
 
 async function getAllCategories () {
     const categories = await categoryRepository.findCategories();
-    const data = getCategoriesArray(categories);
-    return data;
+
+    return categories;
 };
 
 const categoryService = {
@@ -11,8 +11,3 @@ const categoryService = {
 };
 
 export default categoryService;
-
-
-function getCategoriesArray(categories) {
-    return categories.map((category) => category.name);
-};
