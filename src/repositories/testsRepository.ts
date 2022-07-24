@@ -1,62 +1,75 @@
 import prisma from '../config/database.js';
-import { Test } from '@prisma/client';
-import { CreateTestData } from '../utils/types.js';
+import { TestDB } from '../utils/types.js';
 
-type CreateTestDB = Omit<Test, "id">;
-
-export async function insertTest (testData: CreateTestDB) {
+export async function insertTest(testData: TestDB) {
     await prisma.test.create({
         data: testData
     });
 };
 
-async function findCategoryByName(categoryName: string) {
-    const category = await prisma.category.findFirst({
-        where: {
-            name: categoryName
-        }
+export async function getAllTests() {
+    return await prisma.term.findMany({
+        select: {
+            id: true,
+            number: true,
+            disciplines: {
+                select: {
+                    id: true,
+                    name: true,
+                    term: true,
+                    teacherDisciplines: {
+                        select: {
+                            id: true,
+                            discipline: { select: {
+                                id: true,
+                                name:true,
+                                teacherDisciplines: true,
+                                term: true
+                            } },
+                            teacher: { select: { id: true, name: true } },
+                            tests: { select: { 
+                                id: true,
+                                name: true,
+                                pdfUrl: true,
+                                category: true,
+                             }},
+                        },
+                    },
+                },
+            },
+        },
     });
-
-    return category.id;
 };
 
-async function findDisciplineByName(disciplineName: string) {
-    const discipline = await prisma.discipline.findFirst({
-        where: {
-            name: disciplineName
-        }
-    });
+// async function getAllTests() {
+//     const tests = await prisma.test.findMany({
+//         include:{
+//             teacherDiscipline:true
+//         }
+//     });
+//     return tests;
+// };
 
-    return discipline.id;
-};
-
-async function findTeacherByName(teacherName: string) {
-    const teacher = await prisma.teacher.findFirst({
-        where: {
-            name: teacherName
-        }
-    });
-
-    return teacher.id;
-};
-
-async function findTeacherDisciplineId(teacherId: number, disciplineId: number) {
-    const teacherDiscipline = await prisma.teacherDiscipline.findFirst({
-        where: {
-            teacherId,
-            disciplineId
-        }
-    });
-
-    return teacherDiscipline.id;
-};
+// async function getAllTests() {
+//     const tests = await prisma.$queryRaw`
+//         SELECT t.name as testName, 
+//         t."pdfUrl" as pdfUrl, c.name as category, 
+//         u.name as discipline, w.name as teacher, z.number as term
+//         FROM tests t
+//         JOIN categories c ON t."categoryId" = c.id
+//         JOIN "teachersDisciplines" h ON t."teacherDisciplineId" = h.id
+//         JOIN disciplines u ON h."disciplineId" = u.id
+//         JOIN teachers w ON h."teacherId" = w.id
+//         JOIN terms z ON u."termId" = z.id
+//         GROUP BY (t.name, t."pdfUrl", c.name, u.name, w.name, z.number)
+//         ORDER BY (u.name, z.number, c.name)    
+//     `
+//     return tests;
+// };
 
 const testsRepository = {
     insertTest,
-    findCategoryByName,
-    findDisciplineByName,
-    findTeacherByName,
-    findTeacherDisciplineId
+    getAllTests
 };
 
 export default testsRepository;

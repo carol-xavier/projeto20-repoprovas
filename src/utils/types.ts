@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User, Test } from "@prisma/client";
 
 export type CreateUserData = Omit<User, "id">;
 
@@ -9,3 +9,5 @@ export type CreateTestData = {
     discipline: string;
     teacher: string;
   };
+
+export type TestDB = Omit<Test, "id">;
