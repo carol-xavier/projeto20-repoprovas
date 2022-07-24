@@ -1,7 +1,6 @@
 import { CreateTestData, TestDB } from '../utils/types.js';
 import testsIdRepository from '../repositories/testsIdRepository.js';
 import testsRepository from '../repositories/testsRepository.js';
-import testsNamesRepository from '../utils/testsNamesRepository.js';
 
 async function insertTest(data: CreateTestData) {
     const { categoryId, teacherDisciplineId } = await verifyTestData(data);
@@ -17,13 +16,17 @@ async function verifyTestData(data: CreateTestData) {
     return { categoryId, teacherDisciplineId };
 };
 
+async function getTestsGroupedByTeacher() {
+    return await testsRepository.getAllTestsByTeacher()
+}
+
 async function getTestsGroupedByDisciplines() {
-    const tests = await testsRepository.getAllTests();
-    return tests;
+    return await testsRepository.getAllTestsByDiscipline();
 };
 
 const testsService = {
     insertTest,
+    getTestsGroupedByTeacher,
     getTestsGroupedByDisciplines
 };
 

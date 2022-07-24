@@ -13,18 +13,20 @@ export async function createTest(req: Request, res: Response) {
 
 export async function getTests(req: Request, res: Response) {
     const { groupBy } = req.query;
-    // if(groupBy === "teacheres") getTestsByTeachers;
-    if (groupBy === "disciplines") {
+    if(groupBy === "teachers") {
+        const tests = await getTestsByTeachers();
+        return res.send({tests});
+    };
+
+    if(groupBy === "disciplines") {
         const tests = await getTestsByDisciplines();
-        res.send({tests});
+        return res.send({tests});
     };
 };
 
-// async function getTestsByTeachers(req: Request, res: Response) {
-//     const tests: TestDB = await testsService.getTestsGroupedByTeacher();
-
-//     res.status(200).send(tests);
-// };
+async function getTestsByTeachers() {
+    return await testsService.getTestsGroupedByTeacher();
+};
 
 async function getTestsByDisciplines() {
     return await testsService.getTestsGroupedByDisciplines();
