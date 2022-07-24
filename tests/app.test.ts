@@ -15,7 +15,7 @@ beforeEach(async () => {
   
           const userDB = await prisma.user.findFirst({
               where: {email: user.email }
-            });
+            }); 
           expect(userDB.email).toBe(user.email);
       });
   

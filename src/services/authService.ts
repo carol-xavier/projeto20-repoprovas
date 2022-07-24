@@ -1,9 +1,8 @@
 import { User } from "@prisma/client";
+import { CreateUserData } from "../utils/types.js";
 import authRepository from "../repositories/authRepository.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-
-export type CreateUserData = Omit<User, "id">;
 
 async function createUser(data: CreateUserData) {
     const verifyEmail = await authRepository.findUserByEmail(data.email);

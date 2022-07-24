@@ -1,5 +1,5 @@
 import prisma from '../config/database.js';
-import { CreateUserData } from "../services/authService";
+import { CreateUserData } from "../utils/types.js";
 
 export async function insertUser(user: CreateUserData) {
     return prisma.user.create({
