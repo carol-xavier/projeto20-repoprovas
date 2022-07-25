@@ -3,9 +3,11 @@
     "esModuleInterop": true,
     "module": "es6",
     "moduleResolution": "node",
-    "outDir": "dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "target": "ES6"
   },
+  "exclude": ["node_modules", "tests/*", "./jest.config.ts", "prisma/*"],
   "ts-node": {
     "esm": true
   }
