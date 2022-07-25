@@ -17,10 +17,6 @@ beforeAll(async () => {
     token = response.body.token
 });
 
-// beforeEach(async () => {
-//     await prisma.$executeRaw`TRUNCATE TABLE tests;`;
-// });
-
 describe("POST/tests", () => {
     it("Sending the correct object, post a new test in the DB. statusCode=201", async () => {
         const test = testFactory.createTest();
@@ -29,6 +25,15 @@ describe("POST/tests", () => {
             .send(test)
             .set('Authorization', `Bearer ${token}`);
         expect(promise.status).toBe(201);
+    });
+
+    it("Sending the object with missing values. statusCode=404", async () => {
+        const test = testFactory.createWrongTest();
+        const promise = await supertest(app)
+            .post(`/tests`)
+            .send(test)
+            .set('Authorization', `Bearer ${token}`);
+        expect(promise.status).toBe(422);
     });
 });
 

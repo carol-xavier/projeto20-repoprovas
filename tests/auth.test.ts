@@ -20,6 +20,14 @@ describe("auth routes", () => {
     expect(userDB.email).toBe(user.email);
   });
 
+  it("Given an email present in the DB, the answer's conflict. satatusCode=404", async () => {
+    const doubleUser = userFactory.createUser();
+    await supertest(app).post(`/sign-up`).send(doubleUser);
+
+    const promise = await supertest(app).post(`/sign-up`).send(doubleUser);
+    expect(promise.status).toBe(409);
+  });
+
   it("given valid email and password, receive token", async () => {
     const login = userFactory.createUser();
     const user: any = await userFactory.createLogin(login);

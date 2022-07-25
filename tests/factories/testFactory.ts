@@ -5,10 +5,14 @@ const pdfUrl = faker.internet.url();
 const teacher:string = "Diego Pinho";
 const category:string = "Prática";
 
-// const categoryId = faker.datatype.number({ min: 1, max: 3 });
-// const teacherId = faker.datatype.number({ min: 1, max: 2 });
-// const disciplineId = faker.datatype.number({ min: 1, max: 6 });
-// let teacherDisciplineId: number;
+function createWrongTest() {
+    return {
+        "name": testName,
+        "pdfUrl": pdfUrl,
+        "category": category,
+        "discipline": "JavaScript",
+    };
+};
 
 function createTest() {
     return {
@@ -21,7 +25,8 @@ function createTest() {
 };
 
 const testFactory = {
-    createTest
+    createTest,
+    createWrongTest
 };
 
 export default testFactory;
