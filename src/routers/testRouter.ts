@@ -5,8 +5,7 @@ import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddlewar
 import { testSchema } from "../schemas/testSchema.js";
 const testRouter = Router();
 
-testRouter.use(verifyToken);
-testRouter.post("/tests", validateSchemaMiddleware(testSchema), createTest);
-testRouter.get("/tests", getTests);
+testRouter.post("/tests", validateSchemaMiddleware(testSchema), verifyToken, createTest);
+testRouter.get("/tests", verifyToken, getTests);
 
 export default testRouter;

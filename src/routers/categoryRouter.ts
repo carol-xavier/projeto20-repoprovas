@@ -4,8 +4,7 @@ import { getCategories } from "../controllers/categoryController.js";
 
 const categoryRouter = Router();
 
-categoryRouter.use(verifyToken);
-categoryRouter.get("/categories", getCategories);
+categoryRouter.get("/categories", verifyToken, getCategories);
 
 
 export default categoryRouter;
