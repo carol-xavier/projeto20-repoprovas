@@ -35,9 +35,51 @@ POST /sign-up
     - headers: {}
     - body:{
         "email": "lorem@gmail.com", (valor único)
-        "senha": "loremipsum" (mínimo de 10 caracteres)
+        "senha": "loremipsum" 
 }
 ```
+
+```yml 
+POST /sign-in
+    - Rota para fazer login
+    - headers: {}
+    - body: {
+    "email": "lorem@gmail.com",
+    "senha": "loremipsum"
+    }
+```
+
+```yml 
+POST /tests (autenticada)
+    - Rota para inserir uma nova prova
+    - headers: { "Authorization": "Bearer $token" }
+    - body: {
+    "name":"Teste do Test",
+    "pdfUrl": "https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html",
+    "category": "Projeto" || "Prática" || "Recuperação",
+    "discipline": "HTML e CSS",
+    "teacher": "Diego Pinho"
+}
+```
+```yml
+GET /tests?groupBy=disciplines (autenticada)
+    - Rota para listar todas as provas organizadas por disciplina
+    - headers: { "Authorization": "Bearer $token" }
+    - body: {}
+``` 
+```yml
+GET /tests?groupBy=teachers (autenticada)
+    - Rota para listar todas as provas organizadas por instrutor
+    - headers: { "Authorization": "Bearer $token" }
+    - body: {}
+``` 
+```yml
+GET /categories (autenticada)
+    - Rota para enviar todas as categorias de provas no banco de dados (importante para a dinâmica do FrontEnd)
+    - headers: { "Authorization": "Bearer $token" }
+    - body: {}
+``` 
+
 ***
 
 ## 🏁 Rodando a aplicação
