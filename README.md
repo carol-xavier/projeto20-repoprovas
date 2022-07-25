@@ -12,7 +12,7 @@
 
 ##  :clipboard: Descrição
 
-Um sistema de compartilhamento de provas entre estudantes. É possível postar novas provas e buscá-las organizadas por instrutor ou por disciplina.
+Um sistema de compartilhamento de provas entre estudantes. É possível postar novas provas e buscá-las organizadas por instrutor ou por disciplina. Importante checar as categorias (categories), instrutores (teachers) e disciplinas (discipline) fornecidas no seed do banco de dados. 
 ***
 
 ## :computer:	 Tecnologias e Conceitos
