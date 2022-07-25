@@ -53,6 +53,15 @@ describe("GET/tests", () => {
     });
 });
 
+describe("GET/categories", () => {
+    it("return all test categories. statusCode=200", async () => {
+        const promise = await supertest(app)
+            .get(`/categories`)
+            .set('Authorization', `Bearer ${token}`);
+        expect(promise.status).toBe(200);
+    });
+});
+
 afterAll(async () => {
     await prisma.$disconnect();
   });
