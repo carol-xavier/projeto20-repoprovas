@@ -1,7 +1,10 @@
-import { Request, response, Response } from "express";
-import { CreateTestData } from "../utils/types.js";
-import { TestDB } from '../utils/types.js';
+import { Request, Response } from "express";
 import testsService from "../services/testService.js";
+import {
+    CreateTestData,
+    TestDisciplineData,
+    TestTeacherData
+} from "../utils/types.js";
 
 export async function createTest(req: Request, res: Response) {
     const data: CreateTestData = req.body;
@@ -13,14 +16,14 @@ export async function createTest(req: Request, res: Response) {
 
 export async function getTests(req: Request, res: Response) {
     const { groupBy } = req.query;
-    if(groupBy === "teachers") {
-        const tests = await getTestsByTeachers();
-        return res.send({tests});
+    if (groupBy === "teachers") {
+        const tests: TestTeacherData[] = await getTestsByTeachers();
+        return res.send({ tests });
     };
 
-    if(groupBy === "disciplines") {
-        const tests = await getTestsByDisciplines();
-        return res.send({tests});
+    if (groupBy === "disciplines") {
+        const tests: TestDisciplineData[] = await getTestsByDisciplines();
+        return res.send({ tests });
     };
 };
 

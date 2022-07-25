@@ -1,4 +1,4 @@
-import { CreateTestData, TestDB } from '../utils/types.js';
+import { CreateTestData } from '../utils/types.js';
 import testsIdRepository from '../repositories/testsIdRepository.js';
 import testsRepository from '../repositories/testsRepository.js';
 

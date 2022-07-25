@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import { CreateUserData } from "../utils/types.js";
 import authRepository from "../repositories/authRepository.js";
 import jwt from 'jsonwebtoken';
@@ -24,7 +23,7 @@ async function login(data: CreateUserData) {
     if (!passwordValidation) throw { type: "unauthorized" };
 
     const secretKey = process.env.JWT_SECRET;
-    const session = { email: user.email, userId: user.id};
+    const session = { email: user.email, userId: user.id };
     const setting = { expiresIn: 60 * 60 * 5 };
     const token = jwt.sign(session, secretKey, setting);
 
